@@ -1193,15 +1193,23 @@
             hideMarkerOnCollapse: true,
 			 textPlaceholder: 'Search for a School',
 			autoCollapse: false,
-            propertyName: 'School Nam'}));
-			
-			const searchButton = document.getElementsByClassName("search-button")[0];
-      		searchButton.className += " fa fa-binoculars";
-        if (typeof url === 'undefined') {
-            document.getElementsByClassName('search-button')[0].className += ' fa fa-binoculars';
-        } else {
-            document.getElementsByClassName('search-button')[1].className += ' fa fa-binoculars';
-        }
+            propertyName: 'School Nam'
+		}));
+		map.addControl(searchControl);	
+		map.whenReady(function() {
+    // Get the search control wrapper
+    const searchWrapper = document.getElementsByClassName("leaflet-control-search")[0];
+    if (searchWrapper) {
+        // Force the search input to be visible
+        searchWrapper.classList.add("search-expanded");
+        const input = searchWrapper.querySelector("input");
+        if (input) input.style.display = "block";
+
+        // Add the binocular icon to the search button
+        const searchButton = searchWrapper.querySelector(".search-button");
+        if (searchButton) searchButton.classList.add("fa", "fa-binoculars");
+    }	
+       });
         </script>        
     </body>
 </html>
