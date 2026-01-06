@@ -1190,7 +1190,7 @@
         setBounds();
         map.addControl(new L.Control.Search({
             layer: layer_AllSchools_0,
-            initial: false,
+            initial: true,
             hideMarkerOnCollapse: true,
 			 textPlaceholder: 'Search for a School',
 			autoCollapse: false,
@@ -1198,7 +1198,6 @@
 			const searchButton = document.getElementsByClassName("search-button")[0];
       		searchButton.className += " fa fa-binoculars";
       		searchButton.innerHTML +=
-			searchButton.style.width = "fit-content";
         if (typeof url === 'undefined') {
             document.getElementsByClassName('search-button')[0].className += ' fa fa-binoculars';
         } else {
