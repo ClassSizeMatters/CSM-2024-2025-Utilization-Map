@@ -1226,7 +1226,13 @@ var searchControl = new L.Control.Search({
     }
 });
 		map.addControl(searchControl);	
-
+searchControl.on('search:locationfound', function(e) {
+    if (e.layer.getBounds) {
+        map.fitBounds(e.layer.getBounds(), { maxZoom: 18 });
+    } else {
+        map.setView(e.latlng, 18);
+    }
+});
 			// 🔑 Force correct indexing AFTER everything loads
 map.whenReady(function () {
     searchControl.setLayer(layer_AllSchools_0);
