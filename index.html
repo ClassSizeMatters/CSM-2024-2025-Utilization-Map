@@ -1125,23 +1125,24 @@ var searchLayer_AllSchools = new L.geoJson(json_AllSchools_0, {
         map.addLayer(layer_ElementarySchools_9);
         var overlaysTree = [
 			   {
-				   label: '<strong>Utilization percentage</strong><br />' +
-	               '<table>' +
-	               '<tr><td><img src="legend/AllSchools_0_0500.png" /></td><td>0 – 50%</td></tr>' +
-	               '<tr><td><img src="legend/AllSchools_0_50751.png" /></td><td>50 – 75%</td></tr>' +
-	               '<tr><td><img src="legend/AllSchools_0_751002.png" /></td><td>75 – 100%</td></tr>' +
-	               '<tr><td><img src="legend/AllSchools_0_1001253.png" /></td><td>100 – 125%</td></tr>' +
-	               '<tr><td><img src="legend/AllSchools_0_1254.png" /></td><td>125% +</td></tr>' +
-	               '</table>'
-        // ❗ NO layer property → makes it unclickable
+        label: '<strong>Utilization percentage</strong><br />' +
+               '<table>' +
+               '<tr><td><img src="legend/AllSchools_0_0500.png" /></td><td>0 - 50%</td></tr>' +
+               '<tr><td><img src="legend/AllSchools_0_50751.png" /></td><td>50 - 75%</td></tr>' +
+               '<tr><td><img src="legend/AllSchools_0_751002.png" /></td><td>75 - 100%</td></tr>' +
+               '<tr><td><img src="legend/AllSchools_0_1001253.png" /></td><td>100 - 125%</td></tr>' +
+               '<tr><td><img src="legend/AllSchools_0_1254.png" /></td><td>125% +</td></tr>' +
+               '</table>'
     },
-            {label: 'Elementary Schools<br /><table><tr><td style="text-align: center; +</td></tr></table>', layer: layer_ElementarySchools_9},
-            {label: 'Middle Schools<br /><table><tr><td style="text-align: center; +</td></tr></table>', layer: layer_MiddleSchools_8},
-            {label: 'High Schools<br /><table><tr><td style="text-align: center; +</td></tr></table>', layer: layer_HighSchools_7},
-            {label: 'Co-Located Charter Schools<br /><table><tr><td style="text-align: center; +</td></tr></table>', layer: layer_CoLocatedCharterSchools_6},
-            {label: 'Standalone Charter Schools', layer: layer_StandaloneCharterSchools_5},
-            {label: 'School Districts', layer: layer_SchoolDistricts_4},
-            {label: 'City Council Districts', layer: layer_CityCouncilDistricts_3},
+
+    {label: 'Elementary Schools<br /><table><tr><td style="text-align: center; +</td></tr></table>', layer: layer_ElementarySchools_9},
+    {label: 'Middle Schools<br /><table><tr><td style="text-align: center; +</td></tr></table>', layer: layer_MiddleSchools_8},
+    {label: 'High Schools<br /><table><tr><td style="text-align: center; +</td></tr></table>', layer: layer_HighSchools_7},
+    {label: 'Co-Located Charter Schools<br /><table><tr><td style="text-align: center; +</td></tr></table>', layer: layer_CoLocatedCharterSchools_6},
+    {label: 'Standalone Charter Schools', layer: layer_StandaloneCharterSchools_5},
+    {label: 'School Districts', layer: layer_SchoolDistricts_4},
+    {label: 'City Council Districts', layer: layer_CityCouncilDistricts_3}
+];
         var lay = L.control.layers.tree(null, overlaysTree,{
             //namedToggle: true,
             //selectorBack: false,
