@@ -311,6 +311,13 @@
         });
         bounds_group.addLayer(layer_AllSchools_0);
         map.addLayer(layer_AllSchools_0);
+			// 🔍 SEARCH-ONLY LAYER (All Schools only)
+var searchLayer_AllSchools = new L.geoJson(json_AllSchools_0, {
+    interactive: false,
+    pointToLayer: function (feature, latlng) {
+        return L.marker(latlng, { opacity: 0 });
+    }
+});
         map.createPane('pane_NeighborhoodView_1');
         map.getPane('pane_NeighborhoodView_1').style.zIndex = 401;
         var layer_NeighborhoodView_1 = L.tileLayer('https://maps1.nyc.gov/xyz/1.0.0/carto/basemap/{z}/{x}/{y}.jpg', {
@@ -1188,12 +1195,14 @@
             }  
         });       
         setBounds();
-       var searchControl = new L.Control.Search({
-    		layer: layer_AllSchools_0,
-    		hideMarkerOnCollapse: true,
-    		textPlaceholder: 'Search for a School',
-    		autoCollapse: false,
-    		propertyName: 'School Nam'
+       // 🔎 Search control (bound ONLY to All Schools)
+var searchControl = new L.Control.Search({
+    layer: searchLayer_AllSchools,
+    propertyName: 'School Nam',
+    textPlaceholder: 'Search for a School',
+    autoCollapse: false,
+    autoType: false,
+    hideMarkerOnCollapse: true
 });
 		map.addControl(searchControl);	
 
