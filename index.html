@@ -302,12 +302,28 @@
             pane: 'pane_AllSchools_0',
             onEachFeature: pop_AllSchools_0,
             pointToLayer: function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.circleMarker(latlng, style_AllSchools_0_0(feature));
-            },
+                 // Visible marker (unchanged look)
+    var visibleMarker = L.circleMarker(latlng, style_AllSchools_0_0(feature));
+
+    // Invisible click buffer
+    var hitArea = L.circleMarker(latlng, {
+        radius: 12,           // 👈 much easier to click
+        fillOpacity: 0,
+        opacity: 0,
+        interactive: true
+    });
+
+    // Sync popup + hover behavior
+    hitArea.bindPopup(visibleMarker.getPopup());
+    hitArea.on({
+        mouseover: highlightFeature,
+        mouseout: function (e) {
+            layer_AllSchools_0.resetStyle(visibleMarker);
+        }
+    });
+
+    return L.layerGroup([hitArea, visibleMarker]);
+}
         });
         bounds_group.addLayer(layer_AllSchools_0);
         map.addLayer(layer_AllSchools_0);
