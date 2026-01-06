@@ -158,12 +158,12 @@
         }).addTo(map);
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
-            if (bounds_group.getLayers().length) {
-                map.fitBounds(bounds_group.getBounds());
-            }
-            map.setMaxBounds(map.getBounds());
-            map.setMinZoom(map.getZoom());
-        }
+    if (bounds_group.getLayers().length) {
+        map.fitBounds(bounds_group.getBounds(), { padding: [20, 20] });
+    }
+    // Restrict panning but DO NOT reset minZoom dynamically
+    map.setMaxBounds(bounds_group.getBounds());
+}
         function pop_AllSchools_0(feature, layer) {
             layer.on({
                 mouseout: function(e) {
