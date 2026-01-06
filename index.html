@@ -87,7 +87,19 @@
             }
         }
         var map = L.map('map', {
-            zoomControl:false, maxZoom:18, minZoom:10
+			// NYC bounding box
+var nycBounds = L.latLngBounds(
+    L.latLng(40.4774, -74.2591),  // southwest corner
+    L.latLng(40.9176, -73.7004)   // northeast corner
+);
+
+// Center and fit the map to NYC
+map.fitBounds(nycBounds, { padding: [20, 20] });
+
+// Restrict map to NYC
+map.setMaxBounds(nycBounds);  // cannot scroll outside NYC
+map.setMinZoom(10);           // shows all NYC
+map.setMaxZoom(18);           // street-level zoom
         })
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
@@ -156,28 +168,7 @@
         var zoomControl = L.control.zoom({
             position: 'topleft'
         }).addTo(map);
-        var bounds_group = new L.featureGroup([]);
-        function setBounds() {
-   if (bounds_group.getLayers().length) {
-        // Collect all markers from any LayerGroup inside bounds_group
-        let allLayers = [];
-        bounds_group.eachLayer(function(layer) {
-            if (layer instanceof L.Marker || layer instanceof L.CircleMarker) {
-                allLayers.push(layer);
-            } else if (layer instanceof L.LayerGroup) {
-                layer.eachLayer(function(subLayer) {
-                    if (subLayer instanceof L.Marker || subLayer instanceof L.CircleMarker) {
-                        allLayers.push(subLayer);
-                    }
-                });
-            }
-        });
-
-        if (allLayers.length > 0) {
-            map.fitBounds(L.featureGroup(allLayers).getBounds());
-        }
-    }
-}
+       
         function pop_AllSchools_0(feature, layer) {
             layer.on({
                 mouseout: function(e) {
