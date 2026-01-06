@@ -158,11 +158,26 @@
         }).addTo(map);
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
-    if (bounds_group.getLayers().length) {
-        map.fitBounds(bounds_group.getBounds(), { padding: [20, 20] });
+   if (bounds_group.getLayers().length) {
+        // Collect all markers from any LayerGroup inside bounds_group
+        let allLayers = [];
+        bounds_group.eachLayer(function(layer) {
+            if (layer instanceof L.Marker || layer instanceof L.CircleMarker) {
+                allLayers.push(layer);
+            } else if (layer instanceof L.LayerGroup) {
+                layer.eachLayer(function(subLayer) {
+                    if (subLayer instanceof L.Marker || subLayer instanceof L.CircleMarker) {
+                        allLayers.push(subLayer);
+                    }
+                });
+            }
+        });
+
+        if (allLayers.length > 0) {
+            map.fitBounds(L.featureGroup(allLayers).getBounds());
+        }
     }
-    // Restrict panning but DO NOT reset minZoom dynamically
-    map.setMaxBounds(bounds_group.getBounds());
+}
 }
         function pop_AllSchools_0(feature, layer) {
             layer.on({
