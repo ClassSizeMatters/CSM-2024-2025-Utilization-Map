@@ -1194,18 +1194,6 @@
 			 textPlaceholder: 'Search for a School',
 			autoCollapse: false,
             propertyName: 'School Nam'}));
-
-			// Add the control to the map
-			map.addControl(searchControl);
-
-			// Make the search bar always open
-				searchControl.on('search:locationfound', function(e) {
-   			 // optional: do something when a search result is found
-});
-
-				// Programmatically expand the search input
-				searchControl.expand();               // opens the bar
-				searchControl._input.style.display = 'block'; // ensures the input is visible
 			
 			const searchButton = document.getElementsByClassName("search-button")[0];
       		searchButton.className += " fa fa-binoculars";
