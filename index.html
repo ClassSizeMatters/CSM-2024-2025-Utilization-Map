@@ -1203,6 +1203,18 @@ var searchControl = new L.Control.Search({
     autoCollapse: false,
     autoType: false,
     hideMarkerOnCollapse: true
+	// 🔑 Enable partial / substring search
+    filterData: function (text, records) {
+        var result = {};
+        text = text.toLowerCase();
+
+        for (var key in records) {
+            if (key.toLowerCase().indexOf(text) !== -1) {
+                result[key] = records[key];
+            }
+        }
+        return result;
+    }
 });
 		map.addControl(searchControl);	
 
