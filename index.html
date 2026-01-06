@@ -86,21 +86,9 @@
               });
             }
         }
-// NYC bounding box
-var nycBounds = L.latLngBounds(
-    L.latLng(40.4774, -74.2591),  // southwest corner
-    L.latLng(40.9176, -73.7004)   // northeast corner
-);
-
-// Initialize the map
-var map = L.map('map', {
-    maxBounds: nycBounds, // cannot scroll outside NYC
-    minZoom: 10,          // shows all NYC
-    maxZoom: 18           // street-level zoom
-});
-
-// Center and fit the map to NYC
-map.fitBounds(nycBounds, { padding: [20, 20] });
+        var map = L.map('map', {
+            zoomControl:false, maxZoom:18, minZoom:10
+        })
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -165,8 +153,17 @@ map.fitBounds(nycBounds, { padding: [20, 20] });
                 popup._contentNode.classList.remove('media');
             }
         }
-        addTo(map);
-       
+        var zoomControl = L.control.zoom({
+            position: 'topleft'
+        }).addTo(map);
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+            if (bounds_group.getLayers().length) {
+                map.fitBounds(bounds_group.getBounds());
+            }
+            map.setMaxBounds(map.getBounds());
+            map.setMinZoom(map.getZoom());
+        }
         function pop_AllSchools_0(feature, layer) {
             layer.on({
                 mouseout: function(e) {
@@ -328,6 +325,7 @@ map.fitBounds(nycBounds, { padding: [20, 20] });
     return L.layerGroup([hitArea, visibleMarker]);
 }
         });
+        bounds_group.addLayer(layer_AllSchools_0);
         map.addLayer(layer_AllSchools_0);
 			// 🔍 SEARCH-ONLY LAYER (All Schools only)
 var searchLayer_AllSchools = new L.geoJson(json_AllSchools_0, {
@@ -412,6 +410,7 @@ var searchLayer_AllSchools = new L.geoJson(json_AllSchools_0, {
             onEachFeature: pop_CityCouncilDistricts_3,
             style: style_CityCouncilDistricts_3_0,
         });
+        bounds_group.addLayer(layer_CityCouncilDistricts_3);
         map.addLayer(layer_CityCouncilDistricts_3);
         function pop_SchoolDistricts_4(feature, layer) {
             layer.on({
@@ -463,6 +462,7 @@ var searchLayer_AllSchools = new L.geoJson(json_AllSchools_0, {
             onEachFeature: pop_SchoolDistricts_4,
             style: style_SchoolDistricts_4_0,
         });
+        bounds_group.addLayer(layer_SchoolDistricts_4);
         map.addLayer(layer_SchoolDistricts_4);
         function pop_StandaloneCharterSchools_5(feature, layer) {
             layer.on({
@@ -544,6 +544,7 @@ var searchLayer_AllSchools = new L.geoJson(json_AllSchools_0, {
                 return L.shapeMarker(latlng, style_StandaloneCharterSchools_5_0(feature));
             },
         });
+        bounds_group.addLayer(layer_StandaloneCharterSchools_5);
         map.addLayer(layer_StandaloneCharterSchools_5);
         function pop_CoLocatedCharterSchools_6(feature, layer) {
             layer.on({
@@ -695,6 +696,7 @@ var searchLayer_AllSchools = new L.geoJson(json_AllSchools_0, {
                 return L.shapeMarker(latlng, style_CoLocatedCharterSchools_6_0(feature));
             },
         });
+        bounds_group.addLayer(layer_CoLocatedCharterSchools_6);
         map.addLayer(layer_CoLocatedCharterSchools_6);
         function pop_HighSchools_7(feature, layer) {
             layer.on({
@@ -841,6 +843,7 @@ var searchLayer_AllSchools = new L.geoJson(json_AllSchools_0, {
                 return L.circleMarker(latlng, style_HighSchools_7_0(feature));
             },
         });
+        bounds_group.addLayer(layer_HighSchools_7);
         map.addLayer(layer_HighSchools_7);
         function pop_MiddleSchools_8(feature, layer) {
             layer.on({
@@ -987,6 +990,7 @@ var searchLayer_AllSchools = new L.geoJson(json_AllSchools_0, {
                 return L.circleMarker(latlng, style_MiddleSchools_8_0(feature));
             },
         });
+        bounds_group.addLayer(layer_MiddleSchools_8);
         map.addLayer(layer_MiddleSchools_8);
         function pop_ElementarySchools_9(feature, layer) {
             layer.on({
@@ -1133,6 +1137,7 @@ var searchLayer_AllSchools = new L.geoJson(json_AllSchools_0, {
                 return L.circleMarker(latlng, style_ElementarySchools_9_0(feature));
             },
         });
+        bounds_group.addLayer(layer_ElementarySchools_9);
         map.addLayer(layer_ElementarySchools_9);
         var overlaysTree = [
 			   {
