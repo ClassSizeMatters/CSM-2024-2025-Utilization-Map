@@ -1246,7 +1246,7 @@ searchControl.on('search:locationfound', function(e) {
     if (e.layer.getBounds) {
         map.fitBounds(e.layer.getBounds(), { maxZoom: 18 });
     } else {
-       map.flyTo(e.latlng, 19, { duration: 0.8 });
+       map.flyTo(e.latlng, 18, { duration: 0.8 });
     }
 });
 			// 🔑 Force correct indexing AFTER everything loads
