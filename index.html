@@ -1124,14 +1124,15 @@ var searchLayer_AllSchools = new L.geoJson(json_AllSchools_0, {
         bounds_group.addLayer(layer_ElementarySchools_9);
         map.addLayer(layer_ElementarySchools_9);
         var overlaysTree = [
-			 label: '<strong>Utilization percentage</strong><br />' +
-               '<table>' +
-               '<tr><td><img src="legend/AllSchools_0_0500.png" /></td><td>0 – 50%</td></tr>' +
-               '<tr><td><img src="legend/AllSchools_0_50751.png" /></td><td>50 – 75%</td></tr>' +
-               '<tr><td><img src="legend/AllSchools_0_751002.png" /></td><td>75 – 100%</td></tr>' +
-               '<tr><td><img src="legend/AllSchools_0_1001253.png" /></td><td>100 – 125%</td></tr>' +
-               '<tr><td><img src="legend/AllSchools_0_1254.png" /></td><td>125% +</td></tr>' +
-               '</table>'
+			   {
+				   label: '<strong>Utilization percentage</strong><br />' +
+	               '<table>' +
+	               '<tr><td><img src="legend/AllSchools_0_0500.png" /></td><td>0 – 50%</td></tr>' +
+	               '<tr><td><img src="legend/AllSchools_0_50751.png" /></td><td>50 – 75%</td></tr>' +
+	               '<tr><td><img src="legend/AllSchools_0_751002.png" /></td><td>75 – 100%</td></tr>' +
+	               '<tr><td><img src="legend/AllSchools_0_1001253.png" /></td><td>100 – 125%</td></tr>' +
+	               '<tr><td><img src="legend/AllSchools_0_1254.png" /></td><td>125% +</td></tr>' +
+	               '</table>'
         // ❗ NO layer property → makes it unclickable
     },
             {label: 'Elementary Schools<br /><table><tr><td style="text-align: center; +</td></tr></table>', layer: layer_ElementarySchools_9},
