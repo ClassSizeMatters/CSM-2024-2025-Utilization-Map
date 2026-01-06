@@ -1188,13 +1188,13 @@
             }  
         });       
         setBounds();
-        map.addControl(new L.Control.Search({
-            layer: layer_AllSchools_0,
-            hideMarkerOnCollapse: true,
-			 textPlaceholder: 'Search for a School',
-			autoCollapse: false,
-            propertyName: 'School Nam'
-		}));
+       var searchControl = new L.Control.Search({
+    		layer: layer_AllSchools_0,
+    		hideMarkerOnCollapse: true,
+    		textPlaceholder: 'Search for a School',
+    		autoCollapse: false,
+    		propertyName: 'School Nam'
+});
 		map.addControl(searchControl);	
 		map.whenReady(function() {
     // Get the search control wrapper
