@@ -86,21 +86,21 @@
               });
             }
         }
-        var map = L.map('map', {
-			// NYC bounding box
+// NYC bounding box
 var nycBounds = L.latLngBounds(
     L.latLng(40.4774, -74.2591),  // southwest corner
     L.latLng(40.9176, -73.7004)   // northeast corner
 );
 
+// Initialize the map
+var map = L.map('map', {
+    maxBounds: nycBounds, // cannot scroll outside NYC
+    minZoom: 10,          // shows all NYC
+    maxZoom: 18           // street-level zoom
+});
+
 // Center and fit the map to NYC
 map.fitBounds(nycBounds, { padding: [20, 20] });
-
-// Restrict map to NYC
-map.setMaxBounds(nycBounds);  // cannot scroll outside NYC
-map.setMinZoom(10);           // shows all NYC
-map.setMaxZoom(18);           // street-level zoom
-        })
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
