@@ -1196,6 +1196,11 @@
     		propertyName: 'School Nam'
 });
 		map.addControl(searchControl);	
+
+			// 🔑 Force correct indexing AFTER everything loads
+map.whenReady(function () {
+    searchControl.setLayer(layer_AllSchools_0);
+	});
 		map.whenReady(function() {
     // Get the search control wrapper
     const searchWrapper = document.getElementsByClassName("leaflet-control-search")[0];
