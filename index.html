@@ -80,6 +80,26 @@
         <script src="data/MiddleSchools_8.js"></script>
         <script src="data/ElementarySchools_9.js"></script>
         <script>
+		<script>
+/* Invisible hit buffer code goes here */
+(function() {
+    map.eachLayer(function(layer) {
+        if (layer instanceof L.CircleMarker && !layer.hitAreaAdded) {
+            var latlng = layer.getLatLng();
+            var hitArea = L.circleMarker(latlng, {
+                radius: layer.getRadius() + 4,
+                color: null,
+                fillColor: null,
+                fillOpacity: 0,
+                opacity: 0,
+                interactive: true
+            }).addTo(map);
+            hitArea.on('click', function() { layer.openPopup(); });
+            layer.hitAreaAdded = true;
+        }
+    });
+})();
+</script>	
         var highlightLayer;
         function highlightFeature(e) {
             highlightLayer = e.target;
