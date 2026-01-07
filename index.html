@@ -833,11 +833,9 @@ var searchLayer_AllSchools = new L.geoJson(json_AllSchools_0, {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, Object.assign(
-    { radius: 10, fillOpacity: 0.7, interactive: true },
-    style_HighSchools_7_0(feature)
-			 }		
-        });
+                return L.circleMarker(latlng, style_HighSchools_7_0(feature));
+    },
+});
         bounds_group.addLayer(layer_HighSchools_7);
         map.addLayer(layer_HighSchools_7);
         function pop_MiddleSchools_8(feature, layer) {
