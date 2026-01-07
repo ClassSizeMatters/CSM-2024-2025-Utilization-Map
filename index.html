@@ -80,7 +80,8 @@
         <script src="data/MiddleSchools_8.js"></script>
         <script src="data/ElementarySchools_9.js"></script>
 	
-        var highlightLayer;
+        <script>
+		var highlightLayer;
         function highlightFeature(e) {
             highlightLayer = e.target;
 
@@ -91,8 +92,7 @@
             } else {
               highlightLayer.setStyle({
                 fillColor: 'rgba(255, 255, 0, 1.00)',
-                fillOpacity: 1
-              });
+                fillOpacity: 1 });
             }
         }
         var map = L.map('map', {
