@@ -334,6 +334,24 @@
         });
         bounds_group.addLayer(layer_AllSchools_0);
         map.addLayer(layer_AllSchools_0);
+		// Click handler to open nearest school popup
+map.on('click', function(e) {
+    var point = e.latlng;
+    var closest = null;
+    var closestDist = Infinity;
+    
+    layer_AllSchools_0.eachLayer(function(marker) {
+        var dist = map.distance(point, marker.getLatLng());
+        if (dist < closestDist) {
+            closestDist = dist;
+            closest = marker;
+        }
+    });
+    
+    if (closest && closestDist < 15) {
+        closest.openPopup();
+    }
+});	
 			// 🔍 SEARCH-ONLY LAYER (All Schools only)
 var searchLayer_AllSchools = new L.geoJson(json_AllSchools_0, {
     interactive: false,
