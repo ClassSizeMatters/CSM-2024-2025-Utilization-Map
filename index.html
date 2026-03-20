@@ -1274,11 +1274,10 @@ var searchControl = new L.Control.Search({
     autoCollapse: false,
     autoType: false,
     hideMarkerOnCollapse: true,
-	// 🔑 Enable partial / substring search
+    // 🔑 Enable partial / substring search
     filterData: function (text, records) {
         var result = {};
         text = text.toLowerCase();
-
         for (var key in records) {
             if (key.toLowerCase().indexOf(text) !== -1) {
                 result[key] = records[key];
@@ -1287,32 +1286,33 @@ var searchControl = new L.Control.Search({
         return result;
     }
 });
-		map.addControl(searchControl);	
+
+map.addControl(searchControl);
+
 searchControl.on('search:locationfound', function(e) {
     if (e.layer.getBounds) {
         map.fitBounds(e.layer.getBounds(), { maxZoom: 18 });
     } else {
         map.setView(e.latlng, 19);
     }
+    // Automatically open the matching school's popup from AllSchools layer
+    layer_AllSchools_0.eachLayer(function(marker) {
+        if (marker.feature.properties['School Nam'] === e.layer.feature.properties['School Nam']) {
+            marker.openPopup();
+        }
+    });
 });
-			// 🔑 Force correct indexing AFTER everything loads
-map.whenReady(function () {
-    searchControl.setLayer(layer_AllSchools_0);
-	});
-		map.whenReady(function() {
-    // Get the search control wrapper
+
+map.whenReady(function() {
     const searchWrapper = document.getElementsByClassName("leaflet-control-search")[0];
     if (searchWrapper) {
-        // Force the search input to be visible
         searchWrapper.classList.add("search-expanded");
         const input = searchWrapper.querySelector("input");
         if (input) input.style.display = "block";
-
-        // Add the binocular icon to the search button
         const searchButton = searchWrapper.querySelector(".search-button");
         if (searchButton) searchButton.classList.add("fa", "fa-binoculars");
-    }	
-       });
-        </script>        
-    </body>
+    }
+});
+</script>
+</body>
 </html>
