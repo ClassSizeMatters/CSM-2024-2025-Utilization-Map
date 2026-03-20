@@ -42,8 +42,12 @@
 }
 /* Expand clickable hit area on all interactive SVG markers */
 .leaflet-pane path.leaflet-interactive {
-    stroke-width: 12px;
+    stroke-width: 20px;
     stroke-opacity: 0;
+}
+.leaflet-pane path.leaflet-interactive:not(:hover) {
+    stroke-width: 1px;
+    stroke-opacity: 0.5;
 }			
 </style>
     </head>
@@ -103,11 +107,6 @@
         var map = L.map('map', {
             zoomControl:false, maxZoom:17, minZoom:1
         })
-		L.CircleMarker.include({
-    _containsPoint: function (p) {
-        return p.distanceTo(this._point) <= (this._radius + 8);
-    }
-});	
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
